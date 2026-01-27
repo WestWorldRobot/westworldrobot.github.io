@@ -31,22 +31,22 @@ const comparisons = [
       <h3 class="robot-title">{comp.robot} <span class="task-label">({comp.task})</span></h3>
 
       <div class="video-comparison-vertical">
-        <!-- Without Pretraining Row -->
-        <div class="video-row">
-          <div class="row-label without">Without Pretraining</div>
-          <div class="video-wrapper">
-            <video autoplay loop muted playsinline>
-              <source src={comp.withoutPre} type="video/mp4" />
-            </video>
-          </div>
-        </div>
-
         <!-- With Pretraining Row -->
         <div class="video-row">
           <div class="row-label with">With Pretraining</div>
           <div class="video-wrapper">
             <video autoplay loop muted playsinline>
               <source src={comp.withPre} type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+        <!-- Without Pretraining Row -->
+        <div class="video-row">
+          <div class="row-label without">Without Pretraining</div>
+          <div class="video-wrapper">
+            <video autoplay loop muted playsinline>
+              <source src={comp.withoutPre} type="video/mp4" />
             </video>
           </div>
         </div>
