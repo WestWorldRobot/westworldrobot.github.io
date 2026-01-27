@@ -26,6 +26,7 @@ const robotDemos = [
 
 <section id="demos" class="content-section demos-section">
   <div class="section-container">
+    <h3 class="section-title-left">WestWorld Matches Ground Truth Most Accurately</h3>
 
     {robotDemos.map((demo) => (
       <div class="robot-section">
@@ -52,12 +53,16 @@ const robotDemos = [
     max-width: 1400px;
   }
 
-  .robot-section {
-    margin-top: 2.5rem;
+  .section-title-left {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #2a2f6c;
+    margin: 0 0 2rem 0;
+    text-align: left;
   }
 
-  .robot-section:first-child {
-    margin-top: 0;
+  .robot-section {
+    margin-top: 2.5rem;
   }
 
   .robot-title {

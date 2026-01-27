@@ -1,11 +1,11 @@
 /* Hero Section styles */
 .hero-section {
   max-width: 1000px;
-  margin: 4rem auto;
+  margin: 2rem auto;
   padding: 1rem;
   text-align: center;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .title-wrapper { 
@@ -36,7 +36,7 @@
   font-size: 2.2rem;
   font-weight: 600;
   color: #333;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .description {

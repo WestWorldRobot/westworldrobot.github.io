@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Demos from '../components/Demos.astro';
+import PretrainingComparison from '../components/PretrainingComparison.astro';
 
 // Import component-specific styles
 import '../styles/section.css';
@@ -12,4 +13,9 @@ const pageTitle = "WestWorld";
 <Layout title={pageTitle}>
   <Hero />
   <Demos />
+  <section id="pretraining" class="content-section pretraining-section">
+    <div class="section-container">
+      <PretrainingComparison />
+    </div>
+  </section>
 </Layout>
