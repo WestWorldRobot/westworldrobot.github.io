@@ -1,0 +1,157 @@
+---
+// Demos.astro - Video demonstrations comparing WestWorld with baselines
+
+// Demo sections by robot type
+const robotDemos = [
+  {
+    robot: "Go1 Quadruped",
+    task: "Walk Straight",
+    models: ["MLP Ensemble", "TDM", "TrajWorld", "WestWorld (Ours)", "Ground Truth"],
+    videoSrc: "/demos/go1_pre_comparison.mp4",
+  },
+  {
+    robot: "Hopper",
+    task: "Hop Forward",
+    models: ["MLP Ensemble", "TDM", "TrajWorld", "WestWorld (Ours)", "Ground Truth"],
+    videoSrc: "/demos/hopper_pre_comparison.mp4",
+  },
+  {
+    robot: "Walker2D",
+    task: "Walk Forward",
+    models: ["MLP Ensemble", "TDM", "TrajWorld", "WestWorld (Ours)", "Ground Truth"],
+    videoSrc: "/demos/walker2d_pre_comparison.mp4",
+  },
+];
+---
+
+<section id="demos" class="content-section demos-section">
+  <div class="section-container">
+
+    {robotDemos.map((demo) => (
+      <div class="robot-section">
+        <h3 class="robot-title">{demo.robot} <span class="task-label">({demo.task})</span></h3>
+        <div class="comparison-row">
+          <div class="video-wrapper">
+            <video autoplay loop muted playsinline>
+              <source src={demo.videoSrc} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .demos-section {
+    padding-top: 0;
+  }
+
+  .demos-section .section-container {
+    max-width: 1400px;
+  }
+
+  .robot-section {
+    margin-top: 2.5rem;
+  }
+
+  .robot-section:first-child {
+    margin-top: 0;
+  }
+
+  .robot-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2a2f6c;
+    margin: 0 0 1rem 0;
+  }
+
+  .task-label {
+    font-weight: 400;
+    color: #666;
+    font-size: 1.1rem;
+  }
+
+  .comparison-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .comparison-row {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .row-header {
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #2a2f6c 0%, #3f4d91 100%);
+    color: white;
+  }
+
+  .row-title {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .row-description {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+
+  .video-wrapper {
+    width: 100%;
+    background: #1a1a2e;
+  }
+
+  .video-wrapper video {
+    width: 100%;
+    display: block;
+  }
+
+  .model-labels {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.75rem 0.5rem;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+  }
+
+  .model-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #555;
+    text-align: center;
+    flex: 1;
+  }
+
+  .model-label.ours {
+    color: #2a2f6c;
+    font-weight: 700;
+  }
+
+  .model-label.gt {
+    color: #1e7e34;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .model-labels {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .model-label {
+      font-size: 0.7rem;
+      flex: 0 0 auto;
+      padding: 0.25rem 0.5rem;
+      background: #e9ecef;
+      border-radius: 4px;
+    }
+  }
+</style>

@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Demos from '../components/Demos.astro';
+
+// Import component-specific styles
+import '../styles/section.css';
+import '../styles/hero.css';
+
+const pageTitle = "WestWorld";
+---
+<Layout title={pageTitle}>
+  <Hero />
+  <Demos />
+</Layout>
