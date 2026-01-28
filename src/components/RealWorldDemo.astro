@@ -1,0 +1,68 @@
+---
+// RealWorldDemo.astro - Real-world robot demonstration
+---
+
+<section id="realworld" class="content-section realworld-section">
+  <div class="section-container">
+    <h3 class="section-title-left">Real-World Deployment on Go1 Quadruped</h3>
+
+    <div class="video-block">
+      <div class="video-crop">
+        <video id="realworld-video" controls muted playsinline>
+          <source src="/demos/realworld-go1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="speed-badge">2x</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .realworld-section .section-container {
+    max-width: 1400px;
+  }
+
+  .section-title-left {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #2a2f6c;
+    margin: 0 0 2rem 0;
+    text-align: left;
+  }
+
+  .video-block {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .video-crop {
+    width: 100%;
+    background: #1a1a2e;
+    position: relative;
+  }
+
+  .speed-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 6px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .video-crop video {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+</style>
