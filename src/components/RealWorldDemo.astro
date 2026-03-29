@@ -1,34 +1,59 @@
 ---
-// RealWorldDemo.astro - Real-world robot demonstration
 ---
 
 <section id="realworld" class="content-section realworld-section">
   <div class="section-container">
-    <h3 class="section-title-left">Real-World Deployment on Go1 Quadruped</h3>
+    <h3 class="section-title-left">Real-World Deployment Comparison on the Go1 Quadruped</h3>
 
-    <div class="video-block">
-      <div class="video-crop">
-        <video id="realworld-video" controls muted playsinline>
-          <source src="/demos/realworld-go1.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <!-- <div class="speed-badge">2x</div> -->
+    <div class="comparison-row">
+      <div class="video-block">
+        <div class="video-label baseline-label">TrajWorld (Baseline)</div>
+        <div class="video-crop">
+          <video id="trajworld-video" autoplay controls muted playsinline>
+            <source src="/demos/trajworld-realworld-go1-pip.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <span class="speed-badge">2x</span>
+        </div>
       </div>
+
+      <div class="video-block">
+        <div class="video-label ours-label"><span class="ours-highlight">WestWorld (Ours)</span></div>
+        <div class="video-crop">
+          <video id="realworld-video" autoplay controls muted playsinline>
+            <source src="/demos/realworld-go1-pip.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <span class="speed-badge">2x</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-description" style="max-width:1400px; width:100%; margin: 1.5rem auto 0 auto;">
+      <b>Our WestWorld outperforms the strongest baseline TrajWorld in real-world deployment on the Go1 quadruped.</b> Our method successfully completes the straight-walking task and reaches the goal, whereas TrajWorld fails to reliably stand up and move toward the target. Because MPPI relies on accurate long-horizon rollouts, TrajWorld's inaccurate predictions lead to poor action selection and control failure. In contrast, our method remains accurate enough to support stable real-world control, despite being trained only on an offline simulation dataset.
     </div>
   </div>
 </section>
 
-<style>
+<style is:global>
   .realworld-section .section-container {
     max-width: 1400px;
   }
+</style>
 
+<style>
   .section-title-left {
     font-size: 1.75rem;
     font-weight: 600;
     color: #2a2f6c;
     margin: 0 0 2rem 0;
     text-align: left;
+  }
+
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
   }
 
   .video-block {
@@ -38,31 +63,64 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
+  .video-label {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+  }
+
+  .baseline-label {
+    background: #6b7280;
+    color: white;
+  }
+
+  .ours-label {
+    background: #2a2f6c;
+    color: white;
+  }
+
+  .ours-highlight {
+    background: #facc15;
+    color: #1a1a2e;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
   .video-crop {
     width: 100%;
     background: #1a1a2e;
     position: relative;
   }
 
+  .video-crop video {
+    width: 100%;
+    display: block;
+  }
+
   .speed-badge {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    background: rgba(0, 0, 0, 0.7);
+    bottom: 16px;
+    left: 16px;
     color: white;
-    font-size: 1.3rem;
-    font-weight: 700;
-    padding: 6px 14px;
-    border-radius: 6px;
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
     pointer-events: none;
     z-index: 1;
   }
 
-  .video-crop video {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    object-position: center;
-    display: block;
+  .section-description {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #333;
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    .comparison-row {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
