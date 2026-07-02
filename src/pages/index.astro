@@ -1,9 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
-import Demos from '../components/Demos.astro';
-import RealWorldDemo from '../components/RealWorldDemo.astro';
-import PretrainingComparison from '../components/PretrainingComparison.astro';
+import TLDR from '../components/TLDR.astro';
+import MainMethod from '../components/MainMethod.astro';
+import Experiments from '../components/Experiments.astro';
+import AuthorsCitation from '../components/AuthorsCitation.astro';
 
 // Import component-specific styles
 import '../styles/section.css';
@@ -13,11 +14,8 @@ const pageTitle = "WestWorld";
 ---
 <Layout title={pageTitle}>
   <Hero />
-  <RealWorldDemo />
-  <Demos />
-  <section id="pretraining" class="content-section pretraining-section">
-    <div class="section-container">
-      <PretrainingComparison />
-    </div>
-  </section>
+  <TLDR />
+  <MainMethod />
+  <Experiments />
+  <AuthorsCitation />
 </Layout>

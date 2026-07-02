@@ -1,0 +1,544 @@
+---
+// Experiments.astro - Merged experiments section for WestWorld.
+// Interleaves quantitative results (tables/figures) with the existing
+// qualitative video demos, in paper-style order. Video components are
+// rendered untouched; they keep their own 1400px-wide containers.
+import PretrainingComparison from './PretrainingComparison.astro';
+import RealWorldDemo from './RealWorldDemo.astro';
+---
+<section id="experiments">
+
+  <!-- ===== Zero-shot Generalization (Table 1 + Figure 2) ===== -->
+  <div class="content-section">
+    <div class="section-container">
+      <h2 class="section-title">Experiments</h2>
+
+      <h3 class="subsection-title">Evaluation on Zero-shot Performance</h3>
+      <div class="experiment-block">
+        <div class="table-container">
+          <div class="table-wrap">
+            <table class="results-table">
+              <thead>
+                <tr class="group-header">
+                  <th rowspan="2">Method</th>
+                  <th colspan="2">Walker2D (×10⁻²)</th>
+                  <th colspan="2">Hopper (×10⁻²)</th>
+                  <th colspan="2">Franka (×10⁻²)</th>
+                </tr>
+                <tr>
+                  <th>MAE ↓</th>
+                  <th>MSE ↓</th>
+                  <th>MAE ↓</th>
+                  <th>MSE ↓</th>
+                  <th>MAE ↓</th>
+                  <th>MSE ↓</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="method-name">MLP Ensemble</td>
+                  <td>26.006</td>
+                  <td>12.028</td>
+                  <td>19.987</td>
+                  <td>7.216</td>
+                  <td>12.164</td>
+                  <td>4.271</td>
+                </tr>
+                <tr>
+                  <td class="method-name">TDM</td>
+                  <td>20.122</td>
+                  <td>6.428</td>
+                  <td>17.634</td>
+                  <td>5.076</td>
+                  <td>23.686</td>
+                  <td>8.435</td>
+                </tr>
+                <tr>
+                  <td class="method-name">TrajWorld</td>
+                  <td>22.261</td>
+                  <td>8.623</td>
+                  <td>17.388</td>
+                  <td>5.441</td>
+                  <td>13.102</td>
+                  <td>5.127</td>
+                </tr>
+                <tr class="ours-row">
+                  <td class="method-name">WestWorld (Ours)</td>
+                  <td><strong>16.350</strong></td>
+                  <td><strong>5.064</strong></td>
+                  <td><strong>13.731</strong></td>
+                  <td><strong>3.368</strong></td>
+                  <td><strong>7.737</strong></td>
+                  <td><strong>2.539</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-caption">
+            <strong>Table 1: Zero-shot generalization performance.</strong>
+            We evaluate zero-shot performance on three unseen robotic environments: Hopper and Walker2D from D4RL, and a real-world Franka manipulator. <span class="insight-highlight">WestWorld outperforms all baselines across all systems, demonstrating that our system-aware MoE architecture and structural inductive bias effectively capture distinct dynamics while mitigating task interference.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="experiment-block">
+        <div class="figure-container">
+          <img src="/exps/fig_all_datasets_all_methods_subplots.png" alt="Trajectory visualization for all robots" class="experiment-figure" />
+          <p class="figure-caption">
+            <strong>Figure 2: Trajectory visualization for zero-shot generalization.</strong>
+            WestWorld tracks the ground-truth dynamics substantially more closely than the baselines over the 100-step horizon. In a zero-shot setting on unseen but structurally similar systems, our model selects appropriate experts to produce accurate dynamics predictions, whereas baseline methods lack morphology-aware representations and fail to generalize.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Few-shot Adaptation (Table 2) ===== -->
+  <div class="content-section">
+    <div class="section-container">
+      <h3 class="subsection-title">Evaluation on Few-shot Adaptation</h3>
+      <div class="experiment-block">
+        <div class="table-container">
+          <div class="table-wrap">
+            <table class="results-table">
+              <thead>
+                <tr class="group-header">
+                  <th rowspan="2">Method</th>
+                  <th colspan="2">Cassie (×10⁻²)</th>
+                  <th colspan="2">A1 (×10⁻²)</th>
+                  <th colspan="2">UR5 (×10⁻²)</th>
+                </tr>
+                <tr>
+                  <th>MAE ↓</th>
+                  <th>MSE ↓</th>
+                  <th>MAE ↓</th>
+                  <th>MSE ↓</th>
+                  <th>MAE ↓</th>
+                  <th>MSE ↓</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="method-name">MLP Ensemble</td>
+                  <td>14.369 <span class="std">± 0.523</span></td>
+                  <td>4.416 <span class="std">± 0.368</span></td>
+                  <td>14.357 <span class="std">± 1.009</span></td>
+                  <td>3.707 <span class="std">± 0.523</span></td>
+                  <td>15.181 <span class="std">± 0.597</span></td>
+                  <td>4.936 <span class="std">± 0.322</span></td>
+                </tr>
+                <tr>
+                  <td class="method-name">TDM</td>
+                  <td>14.510 <span class="std">± 0.642</span></td>
+                  <td>3.404 <span class="std">± 0.300</span></td>
+                  <td>10.624 <span class="std">± 0.312</span></td>
+                  <td>2.151 <span class="std">± 0.109</span></td>
+                  <td>18.578 <span class="std">± 0.324</span></td>
+                  <td>5.510 <span class="std">± 0.175</span></td>
+                </tr>
+                <tr>
+                  <td class="method-name">TrajWorld</td>
+                  <td>7.834 <span class="std">± 0.167</span></td>
+                  <td>1.697 <span class="std">± 0.109</span></td>
+                  <td>5.138 <span class="std">± 0.200</span></td>
+                  <td>0.900 <span class="std">± 0.050</span></td>
+                  <td>8.066 <span class="std">± 0.799</span></td>
+                  <td>2.117 <span class="std">± 0.433</span></td>
+                </tr>
+                <tr class="ours-row">
+                  <td class="method-name">WestWorld (Ours)</td>
+                  <td><strong>5.316 <span class="std">± 0.108</span></strong></td>
+                  <td><strong>0.808 <span class="std">± 0.025</span></strong></td>
+                  <td><strong>4.227 <span class="std">± 0.120</span></strong></td>
+                  <td><strong>0.628 <span class="std">± 0.040</span></strong></td>
+                  <td><strong>4.925 <span class="std">± 0.317</span></strong></td>
+                  <td><strong>0.831 <span class="std">± 0.150</span></strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-caption">
+            <strong>Table 2: Few-shot adaptation performance.</strong>
+            We evaluate few-shot adaptation (10 episodes per system) on three real-world datasets with significant domain gap: Cassie bipedal jumping, Unitree A1 quadruped locomotion, and UR5 tabletop manipulation. <span class="insight-highlight">Despite the large morphology and dynamics gap, WestWorld consistently outperforms all baselines, showing that pretraining provides strong initialization even for systems with substantial domain differences.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scalability (Figure 4 + Figure 3) ===== -->
+  <div class="content-section">
+    <div class="section-container">
+      <h3 class="subsection-title">Evaluation on Scalability</h3>
+      <div class="experiment-block">
+        <div class="figure-container">
+          <img src="/exps/fig_num_envs.png" alt="Scalability comparison" class="experiment-figure figure-small" />
+          <p class="figure-caption">
+            <strong>Figure 4: Scalability comparison.</strong>
+            We pretrain on N = 1, 2, 5, 10, 20, 30, 50, 60, 89 environments. WestWorld's accuracy stays consistently low as N grows, while TrajWorld degrades substantially due to gradient interference, demonstrating our model's scalability across diverse environments.
+          </p>
+        </div>
+      </div>
+
+      <div class="experiment-block">
+        <div class="figure-container">
+          <img src="/exps/fig_moe_weights_heatmap_3systems.png" alt="MoE routing weights heatmap" class="experiment-figure" />
+          <p class="figure-caption">
+            <strong>Figure 3: Sys-MoE routing weights across six layers (L1–L6) with four experts (E1–E4).</strong>
+            Brighter colors indicate higher expert activation. The router exhibits sparse, system-dependent expert selection, where different systems use different expert combinations to capture their distinct dynamics. <span class="insight-highlight">This validates our key insight that complex dynamics can be approximated by composing basis dynamics modules, mitigating interference and enabling scalable pretraining.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Downstream Model-Based Control (Table 3) ===== -->
+  <div class="content-section">
+    <div class="section-container">
+      <h3 class="subsection-title">Evaluation on Downstream Control Task</h3>
+      <div class="experiment-block">
+        <div class="table-container">
+          <div class="table-wrap">
+            <table class="results-table">
+              <thead>
+                <tr class="group-header">
+                  <th rowspan="2">Method</th>
+                  <th rowspan="2">Pretrain</th>
+                  <th>Walker2D</th>
+                  <th>Hopper</th>
+                  <th>Go1</th>
+                </tr>
+                <tr>
+                  <th>Reward ↑</th>
+                  <th>Reward ↑</th>
+                  <th>Reward ↑</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="method-name" rowspan="2">MLP Ensemble</td>
+                  <td class="pretrain-no">✗</td>
+                  <td>119.18</td>
+                  <td>147.37</td>
+                  <td>-1.07</td>
+                </tr>
+                <tr>
+                  <td class="pretrain-yes">✓</td>
+                  <td>190.51</td>
+                  <td>200.56</td>
+                  <td>-0.31</td>
+                </tr>
+                <tr class="row-separator">
+                  <td class="method-name" rowspan="2">TDM</td>
+                  <td class="pretrain-no">✗</td>
+                  <td>122.65</td>
+                  <td>242.34</td>
+                  <td>-0.72</td>
+                </tr>
+                <tr>
+                  <td class="pretrain-yes">✓</td>
+                  <td>207.61</td>
+                  <td>154.64</td>
+                  <td>0.03</td>
+                </tr>
+                <tr class="row-separator">
+                  <td class="method-name" rowspan="2">TrajWorld</td>
+                  <td class="pretrain-no">✗</td>
+                  <td>395.23</td>
+                  <td>366.26</td>
+                  <td>0.05</td>
+                </tr>
+                <tr>
+                  <td class="pretrain-yes">✓</td>
+                  <td>1933.52</td>
+                  <td>534.32</td>
+                  <td>0.49</td>
+                </tr>
+                <tr class="row-separator ours-row">
+                  <td class="method-name" rowspan="2">WestWorld (Ours)</td>
+                  <td class="pretrain-no">✗</td>
+                  <td>707.61</td>
+                  <td>554.92</td>
+                  <td>0.43</td>
+                </tr>
+                <tr class="ours-row">
+                  <td class="pretrain-yes">✓</td>
+                  <td><strong>2134.60</strong></td>
+                  <td><strong>2253.51</strong></td>
+                  <td><strong>2.20</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-caption">
+            <strong>Table 3: Downstream control performance using MPPI.</strong>
+            We report accumulated episode reward averaged over evaluation episodes, comparing fine-tuning from pretrained checkpoint vs. training from scratch on Walker2D, Hopper, and Go1. <span class="insight-highlight">Pretraining consistently improves control performance across nearly all methods, and WestWorld achieves the best performance under both regimes with particularly large gains after pretraining.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Effect of Pretraining (with / without pretraining videos) -->
+  <section class="content-section pretraining-section">
+    <div class="section-container">
+      <PretrainingComparison />
+    </div>
+  </section>
+
+  <!-- Real-world deployment videos -->
+  <RealWorldDemo />
+
+  <!-- ===== Ablation Study (Table 4) ===== -->
+  <div class="content-section">
+    <div class="section-container">
+      <h3 class="subsection-title">Ablation Study</h3>
+      <div class="experiment-block">
+        <div class="table-container">
+          <div class="table-wrap">
+            <table class="results-table">
+              <thead>
+                <tr class="group-header">
+                  <th rowspan="2">Method</th>
+                  <th rowspan="2">Sys-MoE</th>
+                  <th rowspan="2">Structural Embedding</th>
+                  <th colspan="2">Walker2D (×10⁻²)</th>
+                  <th colspan="2">Hopper (×10⁻²)</th>
+                  <th colspan="2">Franka (×10⁻²)</th>
+                </tr>
+                <tr>
+                  <th>MAE ↓</th>
+                  <th>MSE ↓</th>
+                  <th>MAE ↓</th>
+                  <th>MSE ↓</th>
+                  <th>MAE ↓</th>
+                  <th>MSE ↓</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="method-name">Ours w/o Sys-MoE</td>
+                  <td class="pretrain-no">✗</td>
+                  <td class="pretrain-yes">✓</td>
+                  <td>18.707</td>
+                  <td>6.797</td>
+                  <td>15.978</td>
+                  <td>4.630</td>
+                  <td>9.392</td>
+                  <td>2.873</td>
+                </tr>
+                <tr>
+                  <td class="method-name">Ours w/o Structural Embedding</td>
+                  <td class="pretrain-yes">✓</td>
+                  <td class="pretrain-no">✗</td>
+                  <td>21.156</td>
+                  <td>7.872</td>
+                  <td>16.227</td>
+                  <td>4.990</td>
+                  <td>7.897</td>
+                  <td>2.707</td>
+                </tr>
+                <tr class="ours-row">
+                  <td class="method-name">WestWorld (Ours)</td>
+                  <td class="pretrain-yes">✓</td>
+                  <td class="pretrain-yes">✓</td>
+                  <td><strong>16.350</strong></td>
+                  <td><strong>5.064</strong></td>
+                  <td><strong>13.731</strong></td>
+                  <td><strong>3.368</strong></td>
+                  <td><strong>7.737</strong></td>
+                  <td><strong>2.539</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-caption">
+            <strong>Table 4: Ablation study under zero-shot setting.</strong>
+            We ablate Sys-MoE by replacing it with a dense SSM, and ablate structural encoding by removing it during pretraining. Removing structural embedding degrades performance on complex morphologies (Hopper, Walker2D), indicating that modeling physical connectivity improves generalization. Replacing Sys-MoE with dense SSM also degrades performance, confirming it mitigates inter-task interference. <span class="insight-highlight">Both components are essential for model generalization and scalable pretraining.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  /* Offset the anchor so nav jumps land below the sticky header */
+  #experiments {
+    scroll-margin-top: calc(var(--header-height, 60px) + 1rem);
+  }
+
+  /* Tighten the vertical rhythm between interleaved blocks */
+  #experiments > .content-section {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .subsection-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #2a2f6c;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .experiment-block {
+    margin-bottom: 2.5rem;
+  }
+
+  .experiment-block:last-child {
+    margin-bottom: 0;
+  }
+
+  .figure-container {
+    text-align: center;
+    margin: 2rem auto;
+  }
+
+  .experiment-figure {
+    max-width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .figure-small {
+    max-width: 60%;
+  }
+
+  /* Results table styling */
+  .table-container {
+    margin: 2rem auto;
+    max-width: 1100px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background: white;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+  }
+
+  .results-table thead th {
+    background: #f3f4f6;
+    font-weight: 700;
+    color: #374151;
+  }
+
+  .results-table .group-header th {
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .results-table .group-header th[colspan] {
+    background: linear-gradient(135deg, #2a2f6c 0%, #3f4d91 100%);
+    color: white;
+  }
+
+  .results-table .group-header th[rowspan] {
+    background: #f3f4f6;
+    vertical-align: middle;
+  }
+
+  .results-table .method-name {
+    text-align: left;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .results-table tbody tr:hover {
+    background-color: #f9fafb;
+  }
+
+  .results-table .ours-row {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  }
+
+  .results-table .ours-row:hover {
+    background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
+  }
+
+  .results-table .ours-row .method-name {
+    font-weight: 700;
+    color: #2a2f6c;
+  }
+
+  .results-table strong {
+    color: #2a2f6c;
+  }
+
+  .results-table .std {
+    font-size: 0.85em;
+    color: #6b7280;
+  }
+
+  .results-table .pretrain-no {
+    color: #dc2626;
+    font-weight: 600;
+  }
+
+  .results-table .pretrain-yes {
+    color: #16a34a;
+    font-weight: 600;
+  }
+
+  .results-table .row-separator td {
+    border-top: 2px solid #e5e7eb;
+  }
+
+  .results-table td[rowspan] {
+    vertical-align: middle;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .table-caption {
+    text-align: left;
+    color: #555;
+    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .table-caption strong {
+    color: #2a2f6c;
+  }
+
+  .figure-caption {
+    text-align: left;
+    color: #555;
+    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .figure-caption strong {
+    color: #2a2f6c;
+  }
+
+  .insight-highlight {
+    color: #059669;
+    font-weight: 500;
+  }
+</style>

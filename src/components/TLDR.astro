@@ -1,0 +1,66 @@
+---
+// TLDR.astro - Displays the TL;DR section for WestWorld
+---
+<section id="tldr" class="content-section">
+  <div class="section-container">
+    <h2 class="section-title">TL;DR</h2>
+
+    <div class="abstract-content">
+      <ul>
+        <li>
+          We propose <strong>WestWorld</strong>, a novel <strong>system-aware MoE architecture</strong> for scaling up the training of trajectory world models across diverse robotic systems.
+        </li>
+        <li>
+          We introduce <strong>knowledge-encoded structural embedding</strong> that provides an explicit inductive bias to enhance <em>zero- and few-shot generalization</em> to unseen robotic systems.
+        </li>
+        <li>
+          We conduct <strong>extensive experiments</strong> to verify the scalability and generalizability of our method, and apply it to a downstream <strong>model-based control task</strong>, demonstrating strong performance in <em>long-horizon planning</em>.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .abstract-content {
+    max-width: 900px;
+    margin: 1rem auto 3rem auto;
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem 2rem 2rem 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    color: #333;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+
+  .abstract-content:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .abstract-content ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .abstract-content li {
+    margin-bottom: 1.2rem;
+  }
+
+  .abstract-content li:last-child {
+    margin-bottom: 0;
+  }
+
+  .abstract-content em {
+    font-style: italic;
+    color: #555;
+  }
+
+  .abstract-content strong {
+    font-weight: 600;
+    color: #2a2f6c;
+  }
+</style>

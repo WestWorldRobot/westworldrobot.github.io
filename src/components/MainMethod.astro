@@ -1,0 +1,49 @@
+---
+// MainMethod.astro - Displays the main methodology figure for WestWorld
+---
+<section id="methodology" class="content-section">
+  <div class="section-container">
+    <h2 class="section-title">Methodology</h2>
+
+    <div class="figure-container">
+      <img src="/main.png" alt="WestWorld framework overview" class="main-figure" />
+      <p class="figure-caption">
+        <strong>Figure 1: WestWorld Framework Overview.</strong>
+        The overall architecture of our proposed WestWorld, consisting of two core components: (a) a <span class="insight-highlight">Knowledge-Encoded Embedding Module</span> that injects structural embeddings as an inductive bias into trajectory representations, and (b) a <span class="insight-highlight">System-aware MoE block</span> that models diverse system dynamics via system-aware expert routing.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .figure-container {
+    text-align: center;
+    margin: 2rem auto;
+  }
+
+  .main-figure {
+    max-width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .figure-caption {
+    text-align: left;
+    color: #555;
+    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .figure-caption strong {
+    color: #2a2f6c;
+  }
+
+  .insight-highlight {
+    color: #059669;
+    font-weight: 600;
+  }
+</style>
