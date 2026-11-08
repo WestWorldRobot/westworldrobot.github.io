@@ -5,8 +5,20 @@
   <div class="section-container">
     <h2 class="section-title">TL;DR</h2>
 
-    <div class="abstract-content">
-      <ul>
+    <div class="tldr-card">
+      <figure class="teaser-frame">
+        <a href="/teaser_image.png" target="_blank" rel="noopener">
+          <img
+            src="/teaser_image.png"
+            alt="WestWorld teaser: one trajectory world model learning dynamics across diverse robotic systems"
+            class="teaser-image"
+            width="1672"
+            height="705"
+          />
+        </a>
+      </figure>
+
+      <ul class="tldr-points">
         <li>
           We propose <strong>WestWorld</strong>, a novel <strong>system-aware MoE architecture</strong> for scaling up the training of trajectory world models across diverse robotic systems.
         </li>
@@ -22,45 +34,81 @@
 </section>
 
 <style>
-  .abstract-content {
+  .tldr-card {
     max-width: 900px;
     margin: 1rem auto 3rem auto;
     background-color: white;
-    border-radius: 12px;
-    padding: 2rem 2rem 2rem 2.5rem;
+    border-radius: 16px;
+    padding: 1.5rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .tldr-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Framed teaser: soft tinted mat so the figure's white panels stand out */
+  .teaser-frame {
+    margin: 0;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, #eef3fc 0%, #e6edf9 100%);
+    border: 1px solid #d6e0f2;
+    border-radius: 12px;
+  }
+
+  .teaser-frame a {
+    display: block;
+  }
+
+  .teaser-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(42, 47, 108, 0.1);
+  }
+
+  .tldr-points {
+    margin: 1.5rem 0 0 0;
+    padding: 1.5rem 1rem 0.25rem 2.25rem;
+    border-top: 1px solid #eceff6;
     line-height: 1.8;
     font-size: 1.05rem;
     color: #333;
     text-align: left;
-    transition: all 0.3s ease;
   }
 
-  .abstract-content:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-    transform: translateY(-2px);
-  }
-
-  .abstract-content ul {
-    margin: 0;
-    padding-left: 1.25rem;
-  }
-
-  .abstract-content li {
+  .tldr-points li {
     margin-bottom: 1.2rem;
   }
 
-  .abstract-content li:last-child {
+  .tldr-points li:last-child {
     margin-bottom: 0;
   }
 
-  .abstract-content em {
+  .tldr-points em {
     font-style: italic;
     color: #555;
   }
 
-  .abstract-content strong {
+  .tldr-points strong {
     font-weight: 600;
     color: #2a2f6c;
+  }
+
+  @media (max-width: 600px) {
+    .tldr-card {
+      padding: 1rem;
+    }
+
+    .teaser-frame {
+      padding: 0.5rem;
+    }
+
+    .tldr-points {
+      padding: 1.25rem 0.25rem 0 1.5rem;
+    }
   }
 </style>
